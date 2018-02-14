@@ -1,0 +1,26 @@
+{
+    "name": "armips",
+    "displayName": "armips",
+    "description": "armips assembly language support",
+    "version": "0.0.1",
+    "publisher": "shygoo",
+    "engines": {
+        "vscode": "^1.20.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "armips",
+            "aliases": ["armips", "armips"],
+            "extensions": [".asm"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "armips",
+            "scopeName": "source.armips",
+            "path": "./syntaxes/armips.tmLanguage.json"
+        }]
+    }
+}

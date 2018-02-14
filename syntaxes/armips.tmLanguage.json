@@ -1,0 +1,170 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "armips",
+	"patterns": [
+		{
+			"include": "#instructions"
+		},
+		{
+			"include": "#branch_instructions"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#registers"
+		},
+		{
+			"include": "#labels"
+		},
+		{
+			"include": "#directives"
+		},
+		{
+			"include": "#operators"
+		},
+
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#builtins"
+		},
+		{
+			"include": "#line_comments"
+		},
+		{
+			"include": "#block_comments"
+		}
+	],
+	"repository": {
+		"instructions": {
+			"patterns": [{
+				"name": "keyword.control.armips",
+				"match": "\\b(li|la|addi|addiu|slti|sltiu|andi|ori|xori|lui|daddi|daddiu|ldl|ldr|lb|lh|lwl|lw|lbu|lhu|lwr|lwu|sb|sh|swl|sw|sdl|sdr|swr|cache|ll|lwc1|ldc1|ld|sc|swc1|sdc1|sdc2|sd|sll|srl|sra|sllv|srlv|srav|sync|mfhi|mthi|mflo|mtlo|dsllv|dsrlv|dsrav|mult|multu|div|divu|dmult|dmultu|ddiv|ddivu|add|addu|sub|subu|and|or|xor|nor|slt|sltu|dadd|daddu|dsub|dsubu|dsll|dsrl|dsra|dsll32|dsrl32|dsra32|mfc0|mtc0|tlbr|tlbwi|tlbwr|tlbp|mfc1|dmfc1|cfc1|mtc1|dmtc1|ctc1|add\\.s|sub\\.s|mul\\.s|div\\.s|sqrt\\.s|abs\\.s|mov\\.s|neg\\.s|round\\.l\\.s|trunc\\.l\\.s|ceil\\.l\\.s|floor\\.l\\.s|round\\.w\\.s|trunc\\.w\\.s|ceil\\.w\\.s|floor\\.w\\.s|cvt\\.s\\.s|cvt\\.d\\.s|cvt\\.w\\.s|cvt\\.l\\.s|c\\.f\\.s|c\\.un\\.s|c\\.eq\\.s|c\\.ueq\\.s|c\\.olt\\.s|c\\.ult\\.s|c\\.ole\\.s|c\\.ule\\.s|c\\.sf\\.s|c\\.ngle\\.s|c\\.seq\\.s|c\\.ngl\\.s|c\\.lt\\.s|c\\.nge\\.s|c\\.le\\.s|c\\.ngt\\.s|add\\.d|sub\\.d|mul\\.d|div\\.d|sqrt\\.d|abs\\.d|mov\\.d|neg\\.d|round\\.l\\.d|trunc\\.l\\.d|ceil\\.l\\.d|floor\\.l\\.d|round\\.w\\.d|trunc\\.w\\.d|ceil\\.w\\.d|floor\\.w\\.d|cvt\\.s\\.d|cvt\\.d\\.d|cvt\\.w\\.d|cvt\\.l\\.d|c\\.f\\.d|c\\.un\\.d|c\\.eq\\.d|c\\.ueq\\.d|c\\.olt\\.d|c\\.ult\\.d|c\\.ole\\.d|c\\.ule\\.d|c\\.sf\\.d|c\\.ngle\\.d|c\\.seq\\.d|c\\.ngl\\.d|c\\.lt\\.d|c\\.nge\\.d|c\\.le\\.d|c\\.ngt\\.d|sgt|sgtu|sge|sgeu|sle|sleu|sne|seq|sge|sgeu|sle|sleu|sne|seq)\\b"
+			}]
+		},
+		"nop": {
+			"patterns": [{
+				"name": "editor.foreground.armips",
+				"match": "\\b(nop)\\b"
+			}]
+		},
+		"branch_instructions": {
+			"patterns": [{
+				"name": "support.type.armips",
+				"match": "\\b(j|jal|beq|beqz|b|bne|bnez|blez|bgtz|beql|beqzl|bnel|bnezl|blezl|bgtzl|jr|jalr|jalr|syscall|break|bltz|bgez|bltzl|bgezl|tgei|tgeiu|tlti|tltiu|teqi|tnei|bltzal|bgezal|bal|bltzall|bgezall|tge|tgeu|tlt|tltu|teq|tne|eret|bc1f|bc1t|bc1fl|bc1tl|blt|bltu|bgt|bgtu|bge|bgeu|ble|bleu|bltl|bltul|bgtl|bgtul|bgel|bgeul|blel|bleul|blt|bltu|bgt|bgtu|bge|bgeu|ble|bleu|bltl|bltul|bgtl|bgtul|bgel|bgeul|blel|bleul)\\b"
+			}]
+		},
+		"registers": {
+			"patterns": [{
+				"name": "constant.language.symbol-type.armips",
+				"match": "\\b(r\\d|r1\\d|r2\\d|r3[0-1]|t[0-9])|s[0-8]|k0|k1|a[0-3]|at\\b"
+			}]
+		},
+		"labels": {
+			"patterns": [
+				{
+					"name": "entity.name.function.armips",
+					"match": "@{0,2}([A-Za-z_][A-Za-z_\\d]+\\:)"
+				},
+				{
+					"match": "(\\.definelabel|\\.macro) ([A-Za-z_][A-Za-z_\\d]+)",
+					"captures": {
+						"1": { "name": "string.regexp.armips" },
+						"2": { "name": "entity.name.function.armips" }
+					}
+				},
+				{
+					"match": "([A-Za-z_][A-Za-z_\\d]+) (equ)",
+					"captures": {
+						"1": { "name": "entity.name.function.armips" },
+						"2": { "name": "string.regexp.armips" }
+					}
+				}
+			]
+		},
+		"directives": {
+			"patterns": [
+				{
+					"name": "string.regexp.armips",
+					"match": "\\.(ascii|asciiz|loadtable|table|definelabel|org|orga|headersize|include|incbin|import|importobj|importlib|n64|psx|ps2|psp|rsp|gba|nds|3ds|arm|thumb|arm\\.big|arm\\.little|pool|msg|macro|endmacro|area|endarea|string|stringn|str|strn|sjis|sjisn|open|close|closefile|create|createfile|align|fill|skip|byte|db|halfword|dh|word|dw|doubleword|dd|float|double|if|ifdef|ifndef|else|elseif|elseifdef|elseifndef|endif|warning|error|notice|resetdelay|fixloaddelay|loadelf)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.armips",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.armips",
+					"match": "\\\\."
+				}
+			]
+		},
+		"operators": {
+			"patterns": [{
+				"name": "keyword.operator.armips",
+				"match": "\\,|\\(|\\)"
+			}]
+		},
+		"builtins": {
+			"patterns": [
+				{
+					"name": "string.regexp.armips",
+					"match": "\\b(equ|version|endianness|outputname|org|orga|headersize|fileexists|filesize|tostring|tohex|round|int|float|frac|abs|hi|lo|strlen|substr|regex_match|regex_search|regex_extract|find|rfind|readbyte|readu8|readu16|readu32|readu64|reads8|reads16|reads32|reads64|readascii|isarm|isthumb)\\b"
+				},
+				{
+					"name": "string.regexp.armips",
+					"match": "\\."
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b0x[A-Fa-f\\d]+"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b\\d[A-Fa-f\\d]+h"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b0o[0-7]+"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b[0-7]+o"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b0b[01]+"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b[01]+b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b\\d+"
+				}
+			]
+		},
+		"line_comments":{
+			"patterns": [{
+				"name": "comment.line.armips",
+				"match": "\\/\\/.+$"
+			}]
+		},
+		"block_comments": {
+			"patterns": [{
+				"name": "comment.block.armips",
+				"match": "\\/\\*[\\s\\S\\r\\n]*?\\*\\/"
+			}]
+		}
+	},
+	"scopeName": "source.armips"
+}
