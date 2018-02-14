@@ -59,7 +59,7 @@
 		"registers": {
 			"patterns": [{
 				"name": "constant.language.symbol-type.armips",
-				"match": "\\b(r\\d|r1\\d|r2\\d|r3[0-1]|t[0-9])|s[0-8]|k0|k1|a[0-3]|at\\b"
+				"match": "\\b(r3[0-1]|r2\\d|r1\\d|r\\d|t[0-9]|s[0-8]|k0|k1|a[0-3]|at|v0|v1|gp|sp|fp|ra)\\b"
 			}]
 		},
 		"labels": {
