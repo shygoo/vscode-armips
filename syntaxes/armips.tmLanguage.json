@@ -23,7 +23,6 @@
 		{
 			"include": "#operators"
 		},
-
 		{
 			"include": "#numbers"
 		},
@@ -59,7 +58,7 @@
 		"registers": {
 			"patterns": [{
 				"name": "constant.language.symbol-type.armips",
-				"match": "\\b(r3[0-1]|r2\\d|r1\\d|r\\d|t[0-9]|s[0-8]|k0|k1|a[0-3]|at|v0|v1|gp|sp|fp|ra)\\b"
+				"match": "\\b(r3[0-1]|r2\\d|r1\\d|r\\d|f3[0-1]|f2\\d|f1\\d|f\\d|t[0-9]|s[0-8]|k0|k1|a[0-3]|at|v0|v1|gp|sp|fp|ra)\\b"
 			}]
 		},
 		"labels": {
@@ -109,6 +108,42 @@
 				"match": "\\,|\\(|\\)"
 			}]
 		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b0x[A-Fa-f\\d]+\\b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b\\d[A-Fa-f\\d]+h\\b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b0o[0-7]+\\b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b[0-7]+o\\b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b0b[01]+\\b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b[01]+b\\b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\b\\d+\\b"
+				},
+				{
+					"name": "constant.numeric.armips",
+					"match": "\\bd+\\.d+\\b"
+				}
+			]
+		},
 		"builtins": {
 			"patterns": [
 				{
@@ -118,38 +153,6 @@
 				{
 					"name": "string.regexp.armips",
 					"match": "\\."
-				}
-			]
-		},
-		"numbers": {
-			"patterns": [
-				{
-					"name": "constant.numeric.armips",
-					"match": "\\b0x[A-Fa-f\\d]+"
-				},
-				{
-					"name": "constant.numeric.armips",
-					"match": "\\b\\d[A-Fa-f\\d]+h"
-				},
-				{
-					"name": "constant.numeric.armips",
-					"match": "\\b0o[0-7]+"
-				},
-				{
-					"name": "constant.numeric.armips",
-					"match": "\\b[0-7]+o"
-				},
-				{
-					"name": "constant.numeric.armips",
-					"match": "\\b0b[01]+"
-				},
-				{
-					"name": "constant.numeric.armips",
-					"match": "\\b[01]+b"
-				},
-				{
-					"name": "constant.numeric.armips",
-					"match": "\\b\\d+"
 				}
 			]
 		},
