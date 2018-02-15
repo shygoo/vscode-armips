@@ -154,10 +154,16 @@
 			]
 		},
 		"line_comments":{
-			"patterns": [{
-				"name": "comment.line.armips",
-				"match": "\\/\\/.+$"
-			}]
+			"patterns": [
+				{
+					"name": "comment.line.armips",
+					"match": "\\/\\/.*$"
+				},
+				{
+					"name": "comment.line.armips",
+					"match": ";.*$"
+				}
+			]
 		},
 		"block_comments": {
 			"patterns": [{
